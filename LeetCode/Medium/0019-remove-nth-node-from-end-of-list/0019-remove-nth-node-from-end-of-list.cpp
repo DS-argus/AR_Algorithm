@@ -11,9 +11,9 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-
-        ListNode S;
-        S.next = head;
+        
+        // 0. Sentinel 이용
+        ListNode S(0, head);
 
         // 1. Linked list 길이 구하기
         ListNode* temp = head;
