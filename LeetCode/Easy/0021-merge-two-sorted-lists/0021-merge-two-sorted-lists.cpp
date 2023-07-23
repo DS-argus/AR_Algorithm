@@ -15,32 +15,30 @@ public:
         ListNode mergedList;
         ListNode* m = &mergedList;
 
-        ListNode* p1 = list1;
-        ListNode* p2 = list2;
+        while(list1 != nullptr || list2 != nullptr){
 
-        while(p1 != nullptr || p2 != nullptr){
-
-            if(p1 == nullptr){
-                m->next = p2;
+            if(list1 == nullptr){
+                m->next = list2;
                 break;
             }
 
-            if(p2 == nullptr){
-                m->next = p1;
+            if(list2 == nullptr){
+                m->next = list1;
                 break;
             }
 
-            if(p1->val >= p2->val){
-                m->next = p2;
-                p2 = p2->next;
+            if(list1->val >= list2->val){
+                m->next = list2;
+                list2 = list2->next;
             }else{
-                m->next = p1;
-                p1 = p1->next;
-            }            
-
+                m->next = list1;;
+                list1 = list1->next;
+            }      
+                  
             m = m->next;
         }
 
         return mergedList.next;
+
     }
 };
