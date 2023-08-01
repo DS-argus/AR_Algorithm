@@ -5,63 +5,50 @@ public:
 
         sort(nums.begin(), nums.end());
         
-        set<vector<int>> resultSet;
+        vector<vector<int>> result;
 
-        for(int i = 0; i<nums.size(); i++){
+        for(int i = 0; i<nums.size()-1; i++){
             
-            int target = nums[i];
-            
-            vector<vector<int>> subresult = twoSum(nums, -target, i);
+            if(i != 0 && nums[i-1] == nums[i]) continue;
 
-            if(subresult.size() != 0){
-                for(auto i: subresult){
-                    resultSet.insert(i);
+            int l = i+1;
+            int r = nums.size()-1;
+
+            while(l<r){
+                
+                int L = nums[l];
+                int R = nums[r];
+                int threeSum = nums[i] + L + R;
+
+                if (threeSum < 0){
+                    
+                    while(l<r){
+                        l++;
+                        if(L != nums[l]) break;
+                    }
+                    
+                }else if (threeSum > 0){
+
+                    while(l<r){
+                        r--;
+                        if(R != nums[r]) break;
+                    }
+
+                }else{
+                    
+                    vector<int> subresult{nums[i], nums[l], nums[r]};
+                    result.push_back(subresult);
+                    while(l<r){
+                        l++;
+                        if(L != nums[l]) break;
+                    }
+
                 }
+            
             }
 
         }
 
-        // convert to vector
-        vector<vector<int>> resultVec(resultSet.begin(), resultSet.end());
-
-        return resultVec;
-
-    }
-
-private:
-    vector<vector<int>> twoSum(vector<int>& numbers, int target, int idx) {
-        int l = 0;
-        int r = numbers.size()-1;
-        if (l == idx) l = l+1;
-        if (r == idx) r = r-1;
-
-        vector<vector<int>> resultVec;
-
-        while(l<r){
-
-            if(numbers[l] + numbers[r] > target){
-                r--;
-                if (r == idx) r = r-1;
-            }else if(numbers[l] + numbers[r] < target){
-                l++;
-                if (l == idx) l = l+1;
-            }else{
-                vector<int> subresult{-target, numbers[l], numbers[r]};
-                sort(subresult.begin(), subresult.end());
-                resultVec.push_back(subresult);                
-
-                // l++;
-                // if(l == idx) l = l+1 ;
-                int temp = numbers[l];
-                while(true){
-                    l++;
-                    if (l == idx) l = l+1;
-                    if (l>=r || temp != numbers[l]) break;
-                }
-            }
-        }
-
-        return resultVec;
-        
+        return result;
     }
 };
