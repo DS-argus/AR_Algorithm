@@ -14,10 +14,8 @@ public:
 
             if(height[l] > height[r]){
                 r--;
-            }else if(height[l] < height[r]){
-                l++;
             }else{
-                height[l+1]>=height[r-1]? l++:r--;
+                l++;
             }
         }
 
