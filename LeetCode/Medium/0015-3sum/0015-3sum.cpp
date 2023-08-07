@@ -21,14 +21,13 @@ public:
                 int threeSum = nums[i] + L + R;
 
                 if (threeSum < 0){
-                    
                     while(l<r){
                         l++;
                         if(L != nums[l]) break;
                     }
                     
                 }else if (threeSum > 0){
-
+                    
                     while(l<r){
                         r--;
                         if(R != nums[r]) break;
