@@ -7,21 +7,23 @@
 class Solution:
 
     def DFShelper(self, root, largest) -> int:
-
-        if root:
-            if root.val >= largest:
-
-                largest = root.val
-
-                return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) + 1
-            else:
-                return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) 
-        else:
+        
+        if root is None:
             return 0
-            
+
+        if root.val >= largest:
+
+            largest = root.val
+
+            return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) + 1
+
+        else:
+
+            return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) 
+
+
     def goodNodes(self, root: TreeNode) -> int:
 
-        ## DFS
         count = 0
         largest = root.val
         count = self.DFShelper(root, largest)
