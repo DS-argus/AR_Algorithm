@@ -8,34 +8,28 @@ class Solution:
 
     def BFS(self, root):
 
-        result = dict()
+        result = list()
 
         if root:
 
-            idx = 0
-
             q = deque()
             q.append(root)
-            result[root.val] = idx
+            result.append(root.val)
 
             while q:
                 
                 cntNode = q.popleft()
 
                 if cntNode.left is None:
-                    idx += 1
-                    result[-1] = idx
+                    result.append(-1)
                 else:
-                    idx += 1
-                    result[cntNode.left.val] = idx
+                    result.append(cntNode.left.val)
                     q.append(cntNode.left)
 
                 if cntNode.right is None:
-                    idx += 1
-                    result[-1] = idx
+                    result.append(-1)
                 else:
-                    idx += 1
-                    result[cntNode.right.val] = idx
+                    result.append(cntNode.right.val)
                     q.append(cntNode.right)
                 
         return result
@@ -44,9 +38,9 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         
         BFSresult = self.BFS(root)
-        value = list(BFSresult.keys())
-        value.sort()
+        uniqueValues = list(set(BFSresult))
+        uniqueValues.sort()
 
-        return value[k]
+        return uniqueValues[k]
 
         
