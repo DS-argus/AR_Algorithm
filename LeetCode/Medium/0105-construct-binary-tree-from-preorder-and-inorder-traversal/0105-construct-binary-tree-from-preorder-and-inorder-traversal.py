@@ -11,6 +11,7 @@ class Solution:
             return root
         
         value = preorder[0]
+        
         root = TreeNode(value)
 
         idx = inorder.index(value)
