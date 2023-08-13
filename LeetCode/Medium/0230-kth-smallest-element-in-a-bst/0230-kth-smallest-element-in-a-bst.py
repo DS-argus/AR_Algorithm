@@ -28,14 +28,15 @@ class Solution:
                 if cntNode.right is not None:
                     result.append(cntNode.right.val)
                     q.append(cntNode.right)
-                
+        
+        result.sort()
+        
         return result
 
 
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         
         BFSresult = self.BFS(root)
-        BFSresult.sort()
 
         return BFSresult[k-1]
 
