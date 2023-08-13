@@ -20,15 +20,12 @@ class Solution:
                 
                 cntNode = q.popleft()
 
-                if cntNode.left is None:
-                    result.append(-1)
-                else:
+                    
+                if cntNode.left is not None:
                     result.append(cntNode.left.val)
                     q.append(cntNode.left)
 
-                if cntNode.right is None:
-                    result.append(-1)
-                else:
+                if cntNode.right is not None:
                     result.append(cntNode.right.val)
                     q.append(cntNode.right)
                 
@@ -41,6 +38,6 @@ class Solution:
         uniqueValues = list(set(BFSresult))
         uniqueValues.sort()
 
-        return uniqueValues[k]
+        return uniqueValues[k-1]
 
         
