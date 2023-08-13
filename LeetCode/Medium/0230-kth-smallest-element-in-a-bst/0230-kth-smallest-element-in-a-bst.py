@@ -35,9 +35,8 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         
         BFSresult = self.BFS(root)
-        uniqueValues = list(set(BFSresult))
-        uniqueValues.sort()
+        BFSresult.sort()
 
-        return uniqueValues[k-1]
+        return BFSresult[k-1]
 
         
