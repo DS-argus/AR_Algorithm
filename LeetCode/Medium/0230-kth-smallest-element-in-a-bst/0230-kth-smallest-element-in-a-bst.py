@@ -14,20 +14,17 @@ class Solution:
 
             q = deque()
             q.append(root)
-            result.append(root.val)
 
             while q:
                 
                 cntNode = q.popleft()
-                    
-                if cntNode.left is not None:
-                    result.append(cntNode.left.val)
-                    q.append(cntNode.left)
 
-                if cntNode.right is not None:
-                    result.append(cntNode.right.val)
+                if cntNode is not None:
+                    result.append(cntNode.val)
+                    q.append(cntNode.left)
                     q.append(cntNode.right)
         
+        print(result)
         result.sort()
 
         return result[k-1]
