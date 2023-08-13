@@ -13,21 +13,7 @@ class Solution:
 
         largest = max(root.val, largest)
 
-
         return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) + (root.val >= largest)
-
-
-        # return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) + 1 if root.val >= largest else return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest)
-
-        # if root.val >= largest:
-
-        #     largest = root.val
-
-        #     return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) + 1
-
-        # else:
-
-        #     return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) 
 
 
     def goodNodes(self, root: TreeNode) -> int:
