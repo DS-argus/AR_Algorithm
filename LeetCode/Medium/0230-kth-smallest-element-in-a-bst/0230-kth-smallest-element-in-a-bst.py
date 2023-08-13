@@ -6,8 +6,8 @@
 #         self.right = right
 class Solution:
 
-    def BFS(self, root):
-
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        
         result = list()
 
         if root:
@@ -19,7 +19,6 @@ class Solution:
             while q:
                 
                 cntNode = q.popleft()
-
                     
                 if cntNode.left is not None:
                     result.append(cntNode.left.val)
@@ -30,14 +29,7 @@ class Solution:
                     q.append(cntNode.right)
         
         result.sort()
-        
-        return result
 
-
-    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        
-        BFSresult = self.BFS(root)
-
-        return BFSresult[k-1]
+        return result[k-1]
 
         
