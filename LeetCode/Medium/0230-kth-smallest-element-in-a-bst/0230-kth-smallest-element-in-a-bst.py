@@ -24,7 +24,6 @@ class Solution:
                     q.append(cntNode.left)
                     q.append(cntNode.right)
         
-        print(result)
         result.sort()
 
         return result[k-1]
