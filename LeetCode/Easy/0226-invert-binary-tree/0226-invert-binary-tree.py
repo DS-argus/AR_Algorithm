@@ -8,15 +8,11 @@ class Solution:
 
     def reverseSubtree(self, root):
         if root is not None:
-            ptr = root
             
-            ptr.right, ptr.left = ptr.left, ptr.right
-            # temp = ptr.right
-            # ptr.right = ptr.left
-            # ptr.left = temp
+            root.right, root.left = root.left, root.right
 
-            self.reverseSubtree(ptr.left)
-            self.reverseSubtree(ptr.right)
+            self.reverseSubtree(root.left)
+            self.reverseSubtree(root.right)
 
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
 
