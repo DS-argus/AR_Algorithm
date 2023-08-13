@@ -11,21 +11,27 @@ class Solution:
         if root is None:
             return 0
 
-        if root.val >= largest:
+        largest = max(root.val, largest)
 
-            largest = root.val
 
-            return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) + 1
+        return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) + (root.val >= largest)
 
-        else:
 
-            return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) 
+        # return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) + 1 if root.val >= largest else return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest)
+
+        # if root.val >= largest:
+
+        #     largest = root.val
+
+        #     return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) + 1
+
+        # else:
+
+        #     return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) 
 
 
     def goodNodes(self, root: TreeNode) -> int:
 
-        count = 0
-        largest = root.val
-        count = self.DFShelper(root, largest)
+        count = self.DFShelper(root, root.val)
 
         return count
