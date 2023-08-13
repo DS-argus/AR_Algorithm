@@ -18,6 +18,4 @@ class Solution:
 
     def goodNodes(self, root: TreeNode) -> int:
 
-        count = self.DFShelper(root, root.val)
-
-        return count
+        return self.DFShelper(root, root.val)
