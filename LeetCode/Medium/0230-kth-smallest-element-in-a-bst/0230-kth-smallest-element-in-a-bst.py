@@ -28,4 +28,3 @@ class Solution:
 
         return result[k-1]
 
-        
