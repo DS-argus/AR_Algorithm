@@ -4,18 +4,18 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
+class Solution(object):
+    def __init__(self) -> None:
+        self.root = None
 
-    def reverseSubtree(self, root):
-        if root is not None:
-            
-            root.right, root.left = root.left, root.right
+    def __invertHelp(self, curNode: TreeNode) -> TreeNode:
+        if curNode:
 
-            self.reverseSubtree(root.left)
-            self.reverseSubtree(root.right)
+            newNode = TreeNode(curNode.val)
+            newNode.left = self.__invertHelp(curNode.right)
+            newNode.right = self.__invertHelp(curNode.left)
+            return newNode
 
-    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-
-        self.reverseSubtree(root)
-
-        return root
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        self.root = root
+        return self.__invertHelp(self.root)
