@@ -14,8 +14,20 @@ public:
     int kthSmallest(TreeNode* root, int& k) {
         if (root) {
             int x = kthSmallest(root->left, k);
-            return !k ? x : !--k ? root->val : kthSmallest(root->right, k);
+
+            if (!k){
+                return x;
+            }else{
+                k--;
+                if (!k){
+                    return root->val;
+                }else{
+                    return kthSmallest(root->right, k);
+                }
+            }
+
         }
         return -1;
     }
 };
+
