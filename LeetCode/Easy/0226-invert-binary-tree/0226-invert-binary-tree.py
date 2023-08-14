@@ -4,18 +4,15 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution(object):
-    def __init__(self) -> None:
-        self.root = None
+class Solution:
 
-    def __invertHelp(self, curNode: TreeNode) -> TreeNode:
-        if curNode:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
 
-            newNode = TreeNode(curNode.val)
-            newNode.left = self.__invertHelp(curNode.right)
-            newNode.right = self.__invertHelp(curNode.left)
-            return newNode
+        if root is not None:
+            
+            root.right, root.left = root.left, root.right
 
-    def invertTree(self, root: TreeNode) -> TreeNode:
-        self.root = root
-        return self.__invertHelp(self.root)
+            self.invertTree(root.left)
+            self.invertTree(root.right)
+
+        return root
