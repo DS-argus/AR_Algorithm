@@ -1,20 +1,20 @@
 class Solution:
 
     def permute(self, nums: List[int]) -> List[List[int]]:
-        
         result = []
-        q = deque()
-        q.append([])
 
-        while q:
-            cntList = q.popleft()
+        if (len(nums) == 1):
+            return [nums[:]]
 
-            if len(cntList) == len(nums):
-                result.append(cntList)
-            else:
-                for num in nums:
-                    if num not in cntList:
-                        newList = cntList + [num]
-                        q.append(newList)
+        for i in range(len(nums)):
+            n = nums.pop(0)
+            
+            perms = self.permute(nums)
+
+            for perm in perms:
+                perm.append(n)
+            result.extend(perms)
+
+            nums.append(n)
         
         return result
