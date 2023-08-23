@@ -7,7 +7,7 @@ class Solution:
             result.append(nums)
                     
         for num in nums:
-            nextNums = nums[:]
+            nextNums = nums.copy()
             nextNums.remove(num)
             self.__subsetsHelp(nextNums, result)
 
