@@ -1,7 +1,7 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
 
-        nums.sort()
+        # nums.sort()
         res = []
         q = deque()
         q.append([])
