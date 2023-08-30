@@ -1,11 +1,12 @@
 N = int(input())
 
-DP = [0] * N
+DP = [[0 for _ in range(2)]for _ in range(N)]
 
 for i in range(N):
-    if i == 0 or i == 1:
-        DP[i] = 1
+    if i == 0:
+        DP[i][1] = 1
     else:
-        DP[i] = DP[i-2] + DP[i-1]
+        DP[i][0] = DP[i-1][0] + DP[i-1][1]
+        DP[i][1] = DP[i-1][0]
 
-print(DP[-1])
+print(DP[-1][0]+DP[-1][1])
