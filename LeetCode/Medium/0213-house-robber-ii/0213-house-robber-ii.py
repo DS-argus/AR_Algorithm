@@ -2,7 +2,7 @@ class Solution:
 
     # House Robber 1의 답
     # nums의 양끝이 연결되어 있지 않음
-    def noRotationRob(self, nums: List[int]) -> int:
+    def Rob_Helper(self, nums: List[int]) -> int:
         
         # DP list 정의 : DP[i] = nums[:i+1]에서 얻을 수 있는 maximum amount
         DP = [0] * len(nums)
@@ -34,7 +34,7 @@ class Solution:
         else:
             # 1. 첫번째를 선택하지 않는 경우 : nums[1:]에서 max 찾기
             # 2. 첫번째를 선택하는 경우 : nums[2:-1]에서 max 찾기 + nums[0]
-            return max(self.noRotationRob(nums[1:]), \
-                       self.noRotationRob(nums[:-1]))
+            return max(self.Rob_Helper(nums[1:]), \
+                       self.Rob_Helper(nums[:-1]))
 
     
