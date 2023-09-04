@@ -9,14 +9,14 @@ class Solution:
         targetSum = sum(nums) // 2
 
         # DP[i] = targetSum이 i+1일 때, i+1을 만들 수 있는지 여부
-        # DP2[i] = i+1을 만들 수 있을 때, 어떤 num으로 만들었는지 담는 list 
+        # DP2[i] = i+1을 만들 수 있을 때, 앞으로 사용가능한 num list
         DP = [False] * targetSum
         DP2 = [[]] * targetSum
         
         # DP list 채우기
         for i in range(targetSum):
 
-            # 만약 target과 동일한 값이 nums에 있으면 무조건 DP[i] = True이고 DP2[i]에 해당 값 추가
+            # 만약 target과 동일한 값이 nums에 있으면 무조건 DP[i] = True이고 DP2[i]는 nums에서 i+1제거
             if (i+1) in nums:
                 left = nums[:]
                 left.remove(i+1)
@@ -32,7 +32,7 @@ class Solution:
                         left = DP2[i-num][:]
                         left.remove(num)
                         DP[i], DP2[i] = True, left
-                        break
+                        # break
 
         return DP[-1]
 
