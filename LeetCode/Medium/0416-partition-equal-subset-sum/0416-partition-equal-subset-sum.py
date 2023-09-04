@@ -13,8 +13,7 @@ class Solution:
         
         for i in range(targetSum):
             if (i+1) in nums:
-                DP[i] = True
-                DP2[i] = [i+1]
+                DP[i], DP2[i] = True, [i+1]
                 continue
             
             for num in nums:
@@ -25,11 +24,11 @@ class Solution:
                     
                     if num in temp:
                         DP[i] = True
-                        DP2[i] = DP2[i-num][:]
-                        DP2[i].append(num)
+                        # DP2[i] = DP2[i-num][:] 
+                        # DP2[i].append(num)
+                        DP2[i] = DP2[i-num] + [num]
                         break
-        print(DP)
-        print(DP2)
+
         return DP[-1]
 
 
