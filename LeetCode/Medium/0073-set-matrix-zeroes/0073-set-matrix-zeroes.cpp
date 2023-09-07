@@ -20,6 +20,8 @@ public:
                 if (rowZero[i] == 1 || colZero[j] == 1) matrix[i][j] = 0;
             }
         }
-            
+
+        delete[] rowZero;
+        delete[] colZero;
     }
 };
