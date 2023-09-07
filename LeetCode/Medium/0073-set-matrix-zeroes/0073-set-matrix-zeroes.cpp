@@ -15,7 +15,6 @@ public:
             }
         }
 
-
         for (int i = 0; i < matrix.size(); i++){
             for (int j = 0; j < matrix[0].size(); j++){
                 if (rowZero[i] == 1 || colZero[j] == 1) matrix[i][j] = 0;
