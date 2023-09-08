@@ -5,5 +5,16 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def goodNodes(self, r, ma=-10000):
-        return self.goodNodes(r.left, max(ma, r.val)) + self.goodNodes(r.right, max(ma, r.val)) + (r.val >= ma) if r else 0
+
+    def DFShelper(self, root, largest) -> int:
+        
+        if root is None: return 0
+
+        largest = max(root.val, largest)
+
+        return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) + (root.val >= largest)
+
+
+    def goodNodes(self, root: TreeNode) -> int:
+
+        return self.DFShelper(root, root.val)
