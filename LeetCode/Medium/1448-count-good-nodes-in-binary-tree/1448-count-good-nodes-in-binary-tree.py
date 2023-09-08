@@ -12,7 +12,9 @@ class Solution:
 
         largest = max(root.val, largest)
 
-        return self.DFShelper(root.left, largest) + self.DFShelper(root.right, largest) + (root.val >= largest)
+        return self.DFShelper(root.left, largest) + \
+               self.DFShelper(root.right, largest) + \
+               (root.val >= largest)
 
 
     def goodNodes(self, root: TreeNode) -> int:
