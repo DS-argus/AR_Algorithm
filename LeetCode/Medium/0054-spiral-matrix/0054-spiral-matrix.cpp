@@ -24,34 +24,17 @@ public:
 
             string nextMove = q.front();
 
-            if (nextMove == "right"){
-                if(c+1<col && matrix[r][c+1]!=101){
-                    c++;
-                }else{
-                    q.pop();
-                    q.push(nextMove);
-                }
-            }else if (nextMove == "down"){
-                if(r+1<row && matrix[r+1][c]!=101){
-                    r++;
-                }else{
-                    q.pop();
-                    q.push(nextMove);
-                }
-            }else if (nextMove == "left"){
-                if(c-1>=0 && matrix[r][c-1]!=101){
-                    c--;
-                }else{
-                    q.pop();
-                    q.push(nextMove);
-                }
+            if (nextMove == "right" && c+1<col && matrix[r][c+1]!=101){
+                c++;
+            }else if (nextMove == "down" && r+1<row && matrix[r+1][c]!=101){
+                r++;
+            }else if (nextMove == "left" && c-1>=0 && matrix[r][c-1]!=101){
+                c--;
+            }else if (nextMove == "up" && r-1>=0 && matrix[r-1][c]!=101){
+                r--;
             }else{
-                if(r-1>=0 && matrix[r-1][c]!=101){
-                    r--;
-                }else{
-                    q.pop();
-                    q.push(nextMove);
-                }
+                q.pop();
+                q.push(nextMove);
             }
         }
 
