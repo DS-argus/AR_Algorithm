@@ -3,11 +3,8 @@ public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
 
         vector<int> spiral;
-        int row = matrix.size();
-        int col = matrix[0].size();
-
-        int r = 0;
-        int c = 0;
+        int row = matrix.size(), col = matrix[0].size();
+        int r = 0, c = 0;
 
         queue<string> q;
         q.push("right");
