@@ -1,15 +1,6 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        bits = (1<<(len(nums)+1))-1
-
-        for num in nums:
-            bits -= (1<<num)
-        
-        i= 0
-        while bits // (2**i) != 1:
-            i += 1
-        
-        return i
-            
-            
-        
+        missing = len(nums)
+        for i, num in enumerate(nums):
+            missing ^= i ^ num
+        return missing
