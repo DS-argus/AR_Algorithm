@@ -6,6 +6,6 @@ class Solution:
         
         bits = 0
         for num in nums:
-            bits ^= 2 ** (num-minVal)
+            bits ^= (1<<(num-minVal))
 
         return len(bin(bits))-3+minVal
