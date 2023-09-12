@@ -1,8 +1,6 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        minVal = 3*10**4
-        for num in nums:
-            minVal = min(minVal, num)
+        minVal = min(nums)
         
         bits = 0
         for num in nums:
