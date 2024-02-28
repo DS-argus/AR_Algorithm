@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-int isPalindrome(char *str, int start, int end) {
-    // 주어진 문자열에서 start, end까지가 palindrome인가?
-    // Example
-    //      isPalindrome(s, 0, strlen(s)-1) : s 전체가 palindrome인가?
-    while (start < end) {
-        if (str[start++] != str[end--]) return 0;
-    }
-    return 1;
-}
+// int isPalindrome(char *str, int start, int end) {
+//     // 주어진 문자열에서 start, end까지가 palindrome인가?
+//     // Example
+//     //      isPalindrome(s, 0, strlen(s)-1) : s 전체가 palindrome인가?
+//     while (start < end) {
+//         if (str[start++] != str[end--]) return 0;
+//     }
+//     return 1;
+// }
 
 int isPalindrome(int n) {
     int reverse = 0, temp = n;
@@ -119,4 +120,10 @@ void Eliminate(char *str, char ch)
             str--;
         }
     }
+}
+
+int main(){
+    int a = 1;
+    printf("%d\n", a);
+
 }
