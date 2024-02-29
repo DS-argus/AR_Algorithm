@@ -181,5 +181,6 @@ int main()
 	BST->RemoveNode(6);
 	BST->RemoveNode(3);
 	BST->Display(); cout << endl;
+	
 	return 0;
 }

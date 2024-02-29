@@ -17,7 +17,6 @@ def isPalindrome(s: Union[str, int]) -> bool:
         
         return (reverse == s) # if it is true then it will return 1; 
     
-
 def getDivisions(s: str, start: int, path: list, results: list) -> None:
     """
     주어진 str에 대한 모든 분할 생성
@@ -35,6 +34,23 @@ def getDivisions(s: str, start: int, path: list, results: list) -> None:
     for end in range(start + 1, len(s) + 1):
         # If the current segment is a palindrome, recurse with this segment added to the path
         getDivisions(s, end, path + [s[start:end]], results)
+
+def getSubstrings(s: str, start: int, results: list, k: int) -> None:
+    """
+    문자열 s에 대해 길이가 k(<len(s))인 substrings 생성
+    Example:
+        s = "abcede"
+        getSubstrings(s, 0, substrings:=[], 3)
+        print(substrings) : ['cde', 'bde', 'bce', 'bcd', 'ade', 'ace', 'acd', 'abe', 'abd', 'abc']
+    """
+
+    if len(s) == k:
+        results.append(s)
+        return
+
+    for end in range(start, len(s)):
+        substring = s[:end] + s[end+1:]
+        getSubstrings(substring, end, results, k)
 
 def binarysearch(nums: list[int], target: int) -> int:
     l, r = 0, len(nums) - 1
@@ -185,14 +201,12 @@ class BST():
                     break
 
 
-
-
-
 if __name__ == "__main__":
-    # getDivisions("abcdefe", 0, [], results:=[])
-    # print(len(results))
-    # print(results)
-
-    arr = [27, 10, 12, 20, 25, 13]
-    merge_sort(arr)
-    print(arr)
+    print("[getDivisions]")
+    getDivisions("abcdefe", 0, [], results:=[])
+    print(results)
+    print("==================================")
+    print("[getSubstrings]")
+    getSubstrings("abcede", 0, substrings:=[], 3)
+    print(substrings, len(substrings))
+    

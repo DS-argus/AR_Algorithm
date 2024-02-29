@@ -2,17 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-// int isPalindrome(char *str, int start, int end) {
-//     // 주어진 문자열에서 start, end까지가 palindrome인가?
-//     // Example
-//     //      isPalindrome(s, 0, strlen(s)-1) : s 전체가 palindrome인가?
-//     while (start < end) {
-//         if (str[start++] != str[end--]) return 0;
-//     }
-//     return 1;
-// }
+int isPalindrome_str(char *str, int start, int end) {
+    // 주어진 문자열에서 start, end까지가 palindrome인가?
+    // Example
+    //      isPalindrome(s, 0, strlen(s)-1) : s 전체가 palindrome인가?
+    while (start < end) {
+        if (str[start++] != str[end--]) return 0;
+    }
+    return 1;
+}
 
-int isPalindrome(int n) {
+int isPalindrome_int(int n) {
     int reverse = 0, temp = n;
 
     while (temp != 0) {
@@ -122,8 +122,135 @@ void Eliminate(char *str, char ch)
     }
 }
 
+// Function to clone a string
+char *cloneString(const char *str) {
+    char *clone = (char *)malloc(strlen(str) + 1);
+    strcpy(clone, str);
+    return clone;
+}
+
+// Function to append a string to an array of strings
+void appendStringToArray(char ***array, int *size, const char *str) {
+    (*size)++;
+    *array = (char **)realloc(*array, (*size) * sizeof(char *));
+    (*array)[(*size) - 1] = cloneString(str);
+}
+
+// Function to free memory allocated for an array of strings
+void freeStringArray(char **array, int size) {
+    for (int i = 0; i < size; i++) {
+        free(array[i]);
+    }
+    free(array);
+}
+
+// Recursive function to generate all substrings
+void getSubstrings(const char *s, int start, char ***results, int *size, int k) {
+    int len = strlen(s);
+    if (len == k) {
+        appendStringToArray(results, size, s);
+        return;
+    }
+
+    for (int end = start; end < len; end++) {
+        char *substring = (char *)malloc(len); // len instead of len + 1 because we're removing a char
+        int j = 0;
+        for (int i = 0; i < len; i++) {
+            if (i != end) {
+                substring[j++] = s[i];
+            }
+        }
+        substring[j] = '\0'; // Null-terminate the new string
+        getSubstrings(substring, end, results, size, k);
+        free(substring);
+    }
+}
+
+// Function to free a 2D array of strings
+void free2DStringArray(char ***array, int *sizes, int count) {
+    for (int i = 0; i < count; i++) {
+        freeStringArray(array[i], sizes[i]);
+    }
+    free(array);
+    free(sizes);
+}
+
+// Recursive function to get all divisions
+void getDivisions(const char *s, int start, char **path, int pathSize, char ****results, int **resultsSizes, int *resultsCount) {
+    int len = strlen(s);
+    if (start == len) {
+        // Clone path and add to results
+        (*resultsCount)++;
+        *results = realloc(*results, (*resultsCount) * sizeof(char **));
+        (*resultsSizes) = realloc(*resultsSizes, (*resultsCount) * sizeof(int));
+        (*results)[*resultsCount - 1] = malloc(pathSize * sizeof(char *));
+        (*resultsSizes)[*resultsCount - 1] = pathSize;
+        for (int i = 0; i < pathSize; i++) {
+            (*results)[*resultsCount - 1][i] = cloneString(path[i]);
+        }
+        return;
+    }
+
+    for (int end = start + 1; end <= len; end++) {
+        // Create a new segment of the string
+        char *segment = cloneString(s + start);
+        segment[end - start] = '\0'; // Properly terminate the new segment
+
+        // Append segment to path and call recursively
+        char **newPath = malloc((pathSize + 1) * sizeof(char *));
+        for (int i = 0; i < pathSize; i++) {
+            newPath[i] = path[i]; // Copy existing path
+        }
+        newPath[pathSize] = segment; // Add new segment
+
+        getDivisions(s, end, newPath, pathSize + 1, results, resultsSizes, resultsCount);
+
+        // Free the allocated memory for newPath except the last element
+        free(segment);
+        free(newPath);
+    }
+}
+
+
 int main(){
-    int a = 1;
-    printf("%d\n", a);
+    // // getDivisions example
+    // char *s = "abc";
+    // char **path = NULL;
+    // int pathSize = 0;
+
+    // char ***results = NULL;
+    // int *resultsSizes = NULL;
+    // int resultsCount = 0;
+
+    // getDivisions(s, 0, path, pathSize, &results, &resultsSizes, &resultsCount);
+
+    // for (int i = 0; i < resultsCount; i++) {
+    //     for (int j = 0; j < resultsSizes[i]; j++) {
+    //         printf("%s ", results[i][j]);
+    //     }
+    //     printf("\n");
+    // }
+
+    // // Free allocated memory
+    // free2DStringArray(results, resultsSizes, resultsCount);
+
+    // getSubstrings example
+    const char *s = "abcde";
+    int k = 3;
+
+    char **substrings = NULL;
+    int substringsLen = 0;
+
+    getSubstrings(s, 0, &substrings, &substringsLen, k);
+    printf("%d\n", substringsLen);
+    // Print the results
+    for (int i = 0; i < substringsLen; i++) {
+        printf("%s\n", substrings[i]);
+    }
+
+    // Free allocated memory
+    freeStringArray(substrings, substringsLen);
+
+    return 0;
 
 }
