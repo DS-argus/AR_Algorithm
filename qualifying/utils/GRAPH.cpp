@@ -7,8 +7,9 @@
 using namespace std;
 
 enum { 
-    INFINITY = numeric_limits<int>::max() 
-};
+    INFTY = numeric_limits<int>::max()
+    // INFTY = 2147483647
+};  
 
 enum Color {
     WHITE,
@@ -40,7 +41,7 @@ void breadth_first_search(Graph& G, Vertex* s)
     for (auto& v: G.vertices){
         if (v.id == s->id) continue;
         v.color = WHITE;
-        v.discovery = INFINITY;
+        v.discovery = INFTY;
         v.parent = nullptr;
     }
     s->color = GRAY;
