@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 template<typename T>
+
 struct Node
 {
 	Node* left;
@@ -59,13 +60,13 @@ Node<T>* BinarySearchTree<T>::RemoveSeqence(Node<T>* node, T _vaule)
 	else
 	{
 		Node<T>* ptr = node;
-		//?ž?‹?´?—†?„?–„
+		//ÀÚ½ÄÀÌ¾øÀ»‹š
 		if (node->right==nullptr && node->left==nullptr)
 		{
 			delete node;
 			node = nullptr;
 		}
-		//?ž?‹?´ ?•˜?‚˜?¼?–„
+		//ÀÚ½ÄÀÌ ÇÏ³ªÀÏ‹š
 		else if (node->right == nullptr)
 		{
 			node = node->left;
@@ -76,7 +77,7 @@ Node<T>* BinarySearchTree<T>::RemoveSeqence(Node<T>* node, T _vaule)
 			node = node->right;
 			delete ptr;
 		}
-		//?ž?‹?´ ?‘ê°œì¼?–„ :: ?™¼ìª? ?…¸?“œì¤? ê°??ž¥?°ê°? ì°¾ì•„ ë¶?ëª¨ë…¸?“œë¡? ë°”ê¾¸ê¸?
+		//ÀÚ½ÄÀÌ µÎ°³ÀÏ‹š :: ¿ÞÂÊ ³ëµåÁß °¡ÀåÅ«°ª Ã£¾Æ ºÎ¸ð³ëµå·Î ¹Ù²Ù±â
 		else
 		{
 			ptr = SearchMaxNode(node->left);
@@ -111,7 +112,7 @@ bool BinarySearchTree<T>::SearchValue(T _value)
 	{
 		if (ptr->value == _value)
 		{
-			cout << _value << " ê°’ì„ ì°¾ì•˜?Šµ?‹ˆ?‹¤." << endl;
+			cout << _value << " detected." << endl;
 			return true;
 		}		
 		else if (ptr->value > _value)
@@ -119,7 +120,7 @@ bool BinarySearchTree<T>::SearchValue(T _value)
 		else
 			ptr = ptr->right;
 	}
-	cout << _value << " ê°’ì„ ì°¾ì?? ëª»í–ˆ?Šµ?‹ˆ?‹¤." << endl;
+	cout << _value << " not detected" << endl;
 	return false;
 }
 
@@ -149,7 +150,7 @@ void BinarySearchTree<T>::AddNode(T _value)
 				ptr = ptr->right;
 			}
 		}
-		//?„£?„ ?œ„ì¹˜ì— ????ž…
+		//³ÖÀ» À§Ä¡¿¡ ´ëÀÔ
 		if (node->value < tmpRoot->value )
 			tmpRoot->left = node;
 		else
