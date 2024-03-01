@@ -1,15 +1,3 @@
-//int array에서 특정 int를 제거해주는, void 함수
-void removeElement_int(int* nums, int *numsSize, int val){
-    int index = 0;
-    for (int i = 0; i < *numsSize; i++) {
-        if (nums[i] != val) {
-            nums[index++] = nums[i];
-        }
-    }
-    *numsSize = index;
-}
-
-
 int* topKFrequent(int* nums, int numsSize, int k, int* returnSize) {
     int MIN = 1e4;
     int MAX = -1e4;
