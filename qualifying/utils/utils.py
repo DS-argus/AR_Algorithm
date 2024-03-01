@@ -30,7 +30,7 @@ def getDivisions(s: str, start: int, path: list, results: list) -> None:
     if start == len(s):
         results.append(path[:])
         return
-
+    
     for end in range(start + 1, len(s) + 1):
         # If the current segment is a palindrome, recurse with this segment added to the path
         getDivisions(s, end, path + [s[start:end]], results)
