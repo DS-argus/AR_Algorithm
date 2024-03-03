@@ -11,30 +11,30 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
         
-        // 0. Sentinel 이용
-        ListNode S(0, head);
-
-        // 1. Linked list 길이 구하기
+        int len = 0;
+        
         ListNode* temp = head;
-        int l = 0;
-        while(temp != nullptr){
-            l++;
+        while (temp){
             temp = temp->next;
+            len++;
         }
-
-        // 2. 제거할 노드 찾기
-        ListNode* p = &S;
-
-        // 제거해야할 노드의 바로 이전 노드를 p로 저장
-        for (int i = 0; i < l-n ; i++){
-            p = p -> next;
-        }
-
-        // 3. 노드 제거
-        p->next = p->next->next;
         
-        return S.next;
+        int m = len - n;
+        int i = 0;
+        
+        ListNode* temp2 = dummy;
+        while (i < m){
+            temp2 = temp2->next;
+            i++;
+        }
 
+        ListNode* temp3 = temp2->next->next;
+        temp2->next = temp3;
+
+        return dummy->next;
+        
     }
 };
