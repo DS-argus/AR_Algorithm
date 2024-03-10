@@ -3,6 +3,48 @@ class LinkedNode:
         self.val = x
         self.next = None
 
+# def findMid(head: LinkedNode) -> LinkedNode:
+#     dummy = LinkedNode(0)
+#     dummy.next = head
+#     slow, fast = dummy, dummy
+#     while fast and fast.next:
+#         slow = slow.next
+#         fast = fast.next.next
+#     return slow
+
+# def merge(head1, head2):
+#     dummy = LinkedNode(0)
+#     tail = dummy
+    
+#     while head1 and head2:
+#         if head1.val > head2.val:
+#             tail.next = head1
+#             head1 = head1.next
+#         else:
+#             tail.next = head2
+#             head2 = head2.next
+#         tail = tail.next
+#     if head1:
+#         tail.next = head1
+#     elif head2:
+#         tail.next = head2
+    
+#     return dummy.next
+
+# def sortingLL(head: LinkedNode) -> LinkedNode:
+#     if head is None or head.next is None:
+#         return head
+    
+#     mid = findMid(head)
+#     half = mid.next
+#     mid.next = None
+
+#     l = sortingLL(head)
+#     r = sortingLL(half)
+#     sorted = merge(l, r)
+
+#     return sorted
+
 def findMid(head: LinkedNode) -> LinkedNode:
     if not head:
         return head
@@ -55,7 +97,6 @@ if __name__ == "__main__":
     N4.next = N5
 
     # print(findMid(N1).next.val) # Print : 7
-
 
     result = sortingLL(N1)
 

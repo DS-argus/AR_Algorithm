@@ -26,6 +26,25 @@ char* remove_repeats(const char* s) {
 
     return result;
 }
+
+char* removeDuplicates_str(const char *str) {
+    int len = strlen(str);
+    char *new_str = (char *)malloc(len + 1);
+    int index = 0;
+    for (int i = 0; i < len; i++) {
+        int j;
+        for (j = 0; j < i; j++) {
+            if (str[i] == str[j]) {
+                break;
+            }
+        }
+        if (i == j) {
+            new_str[index++] = str[i];
+        }
+    }
+    new_str[index] = '\0';
+    return new_str;
+}
 // Function to check if a character is adjacent to any character in a substring
 // based on the original string 's'.
 int is_adjacent(const char* s, char bf, char ch) {
@@ -78,7 +97,7 @@ char* foo(const char* s) {
 }
 
 char* bar(const char* s) {
-    s = remove_repeats(s);
+    s = removeDuplicates_str(s);
     char* buffer = (char*)malloc((strlen(s)+1) * sizeof(char));
     generate_combinations(s, buffer, 0, s);
 

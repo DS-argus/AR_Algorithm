@@ -26,46 +26,8 @@ def dfs_help(G, a, c, path, result):
         
 
 if __name__ == "__main__":
-    # a, b, c, d = GNode('a'), GNode('b'), GNode('c'), GNode('d')
-    # G = dict()
-    # G[a], G[b], G[c], G[d] = [b, c], [d], [], [c]
-
-    # print(paths(G,a,c))
-
-
-    # Create nodes
-    # a, b, c, d, e, f = GNode('a'), GNode('b'), GNode('c'), GNode('d'), GNode('e'), GNode('f')
-
-    # # Define the graph
-    # G = dict()
-    # G[a], G[b], G[c], G[d], G[e], G[f] = [b, d], [c, e], [f], [e], [f], []
-
-    # # Print the paths from 'a' to 'f'
-    # print(paths(G, a, f))
-
-
     a, b, c, d = GNode('a'), GNode('b'), GNode('c'), GNode('d')
     G = dict()
     G[a], G[b], G[c], G[d] = [b, c], [d], [], [c]
 
-    print(paths(G, a, c))
-
-    a, b, c, d = GNode('a'), GNode('b'), GNode('c'), GNode('d')
-    e, f = GNode('e'), GNode('f')
-    G = dict()
-    G[a], G[b], G[c], G[d] = [b, c, f], [d], [], [c, f]
-    G[e], G[f] = [c], [c, e]
-
-    print(paths(G, a, c))            
-
-    # a, b, c, d = GNode('a'), GNode('b'), GNode('c'), GNode('d')
-    # G = dict()
-    # G[a], G[b], G[c], G[d] = [b, c], [d, c], [], [c, b]
-
-    # print(paths(G, a, c))
-
-    # a, b, c, d = GNode('a'), GNode('b'), GNode('c'), GNode('d')
-    # G = dict()
-    # G[a], G[b], G[c], G[d] = [b, d], [d, c], [], [c, b]
-
-    # print(paths(G, a, c))
+    print(paths(G,a,c))

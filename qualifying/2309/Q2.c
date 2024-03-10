@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 int isPalindrome(char* s){
     int l = strlen(s);
@@ -10,6 +11,19 @@ int isPalindrome(char* s){
     return 1;
 }
 
+char *removeChar_str(const char *str, int index) {
+    int len = strlen(str);
+    char *new_str = (char *)malloc(len);
+    for (int i = 0; i < len - 1; i++) {
+        if (i < index) {
+            new_str[i] = str[i];
+        } else {
+            new_str[i] = str[i + 1];
+        }
+    }
+    new_str[len - 1] = '\0';
+    return new_str;
+}
 
 void remove_letter(char* s, int start, int* result_len, char* result){
     
@@ -29,17 +43,18 @@ void remove_letter(char* s, int start, int* result_len, char* result){
     for(int i=start; i<l; i++){
         
         // s[i]를 제거한 새로운 배열만들기.
-        char new_s[l];
+        char* new_s = removeChar_str(s, i);
+        // char new_s[l];
         
-        for(int j = 0; j < l-1; j++){
-            if (j >= i){
-                new_s[j] = s[j+1];
-            }else{
-                new_s[j] = s[j];
-            }
-        }
+        // for(int j = 0; j < l-1; j++){
+        //     if (j >= i){
+        //         new_s[j] = s[j+1];
+        //     }else{
+        //         new_s[j] = s[j];
+        //     }
+        // }
         
-        new_s[l-1] = '\0';
+        // new_s[l-1] = '\0';
         
         remove_letter(new_s, i, result_len, result);
     }

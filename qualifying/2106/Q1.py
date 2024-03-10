@@ -1,16 +1,8 @@
-
-
 def smallest_pos_int(arr: list) -> int:
-    pos = set(arr)
-    # pos = [num for num in arr if num > 0]
-    
-    ans = len(pos)+1
-    for i in range(1, ans):
-        if i not in pos:
-            ans = i
-            break
-
-    return ans
+    ans = len(arr)
+    for i in range(1, ans+1):
+        if i not in arr:
+            return i
 
 
 

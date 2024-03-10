@@ -201,12 +201,35 @@ class BST():
                     break
 
 
+## Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
+def permute(nums: list[int]) -> list[list[int]]:
+    result = []
+    permutation(nums, [], result)
+    return result
+
+def permutation(nums: list[int], path: list[int], result: list[list[int]]) -> None:
+    if len(nums) == 0:
+        result.append(path)
+        return
+
+    for i in range(len(nums)):
+        permutation(nums[:i] + nums[i+1:], path + [nums[i]], result)
+
+
 if __name__ == "__main__":
     print("[getDivisions]")
-    getDivisions("abcdefe", 0, [], results:=[])
+    getDivisions("abc", 0, [], results:=[])
     print(results)
     print("==================================")
     print("[getSubstrings]")
     getSubstrings("abcede", 0, substrings:=[], 3)
     print(substrings, len(substrings))
     
+    print("==================================")
+    # permutation example
+    print("[permute]")
+    print(permute([1, 2, 3]))
+    print(permute([0, 1]))
+    print(permute([1]))
+    print(permute([1, 2, 3, 4]))
+    print("==================================")
