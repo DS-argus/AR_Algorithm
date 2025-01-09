@@ -1,64 +1,45 @@
 import sys
-
-input = sys.stdin.readline
-# input 받는 법 : sys.stdin.readline()
-
 from collections import deque
 
+input = sys.stdin.readline
 
-def valid_moves(move: tuple[int, int], ROW: int, COL: int) -> list[tuple]:
 
+def valid_moves(move, ROW, COL):
     row, col = move
-
     MOVES = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-    moves = []
-
     for d_row, d_col in MOVES:
         new_row, new_col = row + d_row, col + d_col
         if 0 <= new_row < ROW and 0 <= new_col < COL:
-            moves.append((new_row, new_col))
-
-    return moves
+            yield (new_row, new_col)
 
 
-def find_island(locations: list, ROW: int, COL: int) -> int:
-    q = deque()
+def find_island(locations, ROW, COL):
+    locations = set(locations)  # Optimize lookups
     cnt = 0
 
-    q.append(locations[0])
-    island = []
-    island.append(locations[0])
-    while q:
-        move = q.popleft()
+    while locations:
+        cnt += 1
+        q = deque([locations.pop()])  # Start from any location
 
-        next_moves = valid_moves(move, ROW, COL)
-
-        for next in next_moves:
-            if next in locations and not next in island:
-                q.append(next)
-                island.append(next)
-
-        if not q:
-            cnt += 1
-
-            for i in island:
-                locations.remove(i)
-
-            island = []
-
-            if len(q) == 0 and locations:
-                q.append(locations[0])
-                island.append(locations[0])
+        while q:
+            move = q.popleft()
+            for next_move in valid_moves(move, ROW, COL):
+                if next_move in locations:
+                    locations.remove(next_move)
+                    q.append(next_move)
 
     return cnt
 
 
+# Input reading
 T = int(input())
-Ms, Ns, Ks, locations = [0] * T, [0] * T, [0] * T, [[0]] * T
+results = []
 
-for t in range(T):
-    Ms[t], Ns[t], Ks[t] = map(int, input().split(" "))
-    locations[t] = [tuple(map(int, input().split(" "))) for _ in range(Ks[t])]
+for _ in range(T):
+    M, N, K = map(int, input().split())
+    locations = [tuple(map(int, input().split())) for _ in range(K)]
+    results.append(find_island(locations, M, N))
 
-for t in range(T):
-    print(find_island(locations[t], Ms[t], Ns[t]))
+# Output results
+for res in results:
+    print(res)
