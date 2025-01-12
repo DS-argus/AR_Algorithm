@@ -4,7 +4,7 @@ input = sys.stdin.readline
 INF = sys.maxsize
 
 M = int(input())
-state = {k: 0 for k in range(1, 21)}
+state = 0
 
 for _ in range(M):
     command = input().strip().split()
@@ -12,24 +12,22 @@ for _ in range(M):
     num = int(command[1]) if len(command) > 1 else None
 
     if inst == "add":
-        state[num] = 1
+        state |= 1 << num
 
     elif inst == "remove":
-        state[num] = 0
+        state &= ~(1 << num)
 
     elif inst == "check":
-        print(int(state[num]))
+        print(1 if (state & (1 << num)) else 0)
 
     elif inst == "toggle":
-        state[num] = (state[num] + 1) % 2
+        state ^= 1 << num
 
     elif inst == "all":
-        for k in state.keys():
-            state[k] = 1
+        state = (1 << 21) - 1
 
     elif inst == "empty":
-        for k in state.keys():
-            state[k] = 0
+        state = 0
 
     else:
         continue
