@@ -19,8 +19,10 @@ def union(a, b):
     root_a = find(a)
     root_b = find(b)
 
-    if root_a != root_b:
+    if root_a < root_b:
         SET[root_b] = root_a
+    else:
+        SET[root_a] = root_b
 
 
 for _ in range(m):
