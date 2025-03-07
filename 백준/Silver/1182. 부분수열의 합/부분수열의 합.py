@@ -1,5 +1,4 @@
 import sys
-from collections import deque
 
 sys.setrecursionlimit(1000000)
 input = sys.stdin.readline
@@ -7,24 +6,13 @@ input = sys.stdin.readline
 N, S = map(int, input().split())
 numbers = list(map(int, input().split()))
 
-cnt = [0]
+def recursive(idx: int, s: int) -> int:
 
+    if idx == N:
+        return 1 if s == S else 0  
 
-def recursive(i: int, s: int):
-    if i == N:
-        if s == S:
-            cnt[0] += 1
-        return
+    return recursive(idx + 1, s) + recursive(idx + 1, s + numbers[idx])
 
-    recursive(i + 1, s + numbers[i])  # numbers[i] 포함
-    recursive(i + 1, s)  # numbers[i] 미포함
-
-    return
-
-
-recursive(0, 0)
-
-if S == 0:
-    print(cnt[0] - 1)
-else:
-    print(cnt[0])
+# 부분합이 0인 경우 공집합 제외 처리
+result = recursive(0, 0) - (1 if S == 0 else 0)
+print(result)
