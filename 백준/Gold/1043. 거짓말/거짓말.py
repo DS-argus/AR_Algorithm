@@ -11,8 +11,6 @@ if known[0] == 0:
     print(M)
     exit()
 
-known = known[1:]
-
 KNOWN = list(range(N + 1))
 
 
@@ -33,17 +31,18 @@ def union(a, b):
         KNOWN[root_a] = root_b
 
 
+# for party in PARTIES:
+#     for i in range(party[0] - 1):
+#         union(party[i + 1], party[i + 2])
+
 for party in PARTIES:
-    for i in range(party[0] - 1):
-        union(party[i + 1], party[i + 2])
-num = 0
-known_group = [find(kn) for kn in known]
-for party in PARTIES:
-    flag = True
-    for participant in party[1:]:
-        if find(participant) in known_group:
-            flag = False
-            break
-    if flag:
-        num += 1
+    rep = party[1]
+    for parti in party[2:]:
+        union(rep, parti)
+
+
+known_group = {find(kn) for kn in known[1:]}
+
+num = sum(all(find(p) not in known_group for p in party[1:]) for party in PARTIES)
+
 print(num)
