@@ -7,13 +7,24 @@ input = sys.stdin.readline
 # 1<=N<=1_000_000_000_000_000_000
 N = int(input())
 
-P = 15 * 10**5
+memo = dict()
+memo[0] = 0
+memo[1] = 1
+memo[2] = 1
 
-N %= P
+def fib(n):
+    if n in memo.keys():
+        return memo[n]
 
-x, y = 0, 1
+    if n % 2 == 0:
+        # print(f"fib({n}) = fib({n//2})*fib({n//2+1}) + fib({n//2-1})*fib(n//2)")
+        ans = fib(n // 2) * fib(n // 2 + 1) + fib(n // 2 - 1) * fib(n // 2)
+    else:
+        # print(f"fib({n}) = fib({n-n//2})*fib({n//2+1}) + fib({n-n//2-1})*fib({n//2})")
+        ans = fib(n - n // 2) * fib(n // 2 + 1) + fib(n - n // 2 - 1) * fib(n // 2)
 
-for _ in range(2, N + 1):
-    y, x = (y + x) % 1_000_000, y
+    memo[n] = ans % 1_000_000
+    return memo[n]
 
-print(y)
+
+print(fib(N))
