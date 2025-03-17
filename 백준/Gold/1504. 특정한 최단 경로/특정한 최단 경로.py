@@ -23,7 +23,7 @@ def dijkstra(start, end):
     heap = [(0, start)]
 
     while heap:
-        w, node = heapq.heappop(heap)
+        _, node = heapq.heappop(heap)
 
         if visit[node - 1]:
             continue
@@ -38,8 +38,9 @@ def dijkstra(start, end):
     return DIST[end - 1]
 
 
-p1 = dijkstra(1, V1) + dijkstra(V1, V2) + dijkstra(V2, V)
-p2 = dijkstra(1, V2) + dijkstra(V2, V1) + dijkstra(V1, V)
+mid_path = dijkstra(V1, V2)
+p1 = dijkstra(1, V1) + mid_path + dijkstra(V2, V)
+p2 = dijkstra(1, V2) + mid_path + dijkstra(V1, V)
 if min(p1, p2) >= sys.maxsize:
     print(-1)
 else:
