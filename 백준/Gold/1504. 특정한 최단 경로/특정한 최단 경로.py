@@ -31,7 +31,7 @@ def dijkstra(start, end):
         visit[node - 1] = True
 
         for c, b in EDGES[node]:
-            if visit[node - 1] and DIST[b - 1] > DIST[node - 1] + c:
+            if not visit[b - 1] and DIST[b - 1] > DIST[node - 1] + c:
                 DIST[b - 1] = DIST[node - 1] + c
                 heapq.heappush(heap, (DIST[b - 1], b))
 
