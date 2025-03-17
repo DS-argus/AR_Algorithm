@@ -12,6 +12,7 @@ memo[0] = 0
 memo[1] = 1
 memo[2] = 1
 
+
 def fib(n):
     if n in memo.keys():
         return memo[n]
@@ -20,8 +21,9 @@ def fib(n):
         # print(f"fib({n}) = fib({n//2})*fib({n//2+1}) + fib({n//2-1})*fib(n//2)")
         ans = fib(n // 2) * fib(n // 2 + 1) + fib(n // 2 - 1) * fib(n // 2)
     else:
-        # print(f"fib({n}) = fib({n-n//2})*fib({n//2+1}) + fib({n-n//2-1})*fib({n//2})")
-        ans = fib(n - n // 2) * fib(n // 2 + 1) + fib(n - n // 2 - 1) * fib(n // 2)
+        #print(f"fib({n}) = fib({n-n//2})*fib({n//2+1}) + fib({n-n//2-1})*fib({n//2})")
+       
+        ans = fib(n // 2 + 1) ** 2 + fib(n // 2) ** 2
 
     memo[n] = ans % 1_000_000
     return memo[n]
