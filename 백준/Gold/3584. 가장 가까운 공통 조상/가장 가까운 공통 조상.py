@@ -1,14 +1,10 @@
-import heapq
 import sys
-from collections import defaultdict, deque
-
 input = sys.stdin.readline
 
 T = int(input())
-for t in range(T):
-
+for _ in range(T):
     N = int(input())
-    parents = dict()
+    parents = {}
 
     for _ in range(N - 1):
         pa, ch = map(int, input().split())
@@ -16,23 +12,15 @@ for t in range(T):
 
     A, B = map(int, input().split())
 
-    Ancestors_A = []
-    Ancestors_B = []
+    # A의 조상들을 set에 저장
+    ancestors = set()
+    while A in parents:
+        ancestors.add(A)
+        A = parents[A]
+    ancestors.add(A)  # 루트도 포함
 
-    anc = A
-    Ancestors_A.append(anc)
+    # B를 위로 타고 올라가면서 A의 조상 중 하나와 처음 만나는 지점이 LCA
+    while B not in ancestors:
+        B = parents[B]
 
-    while anc in parents:
-        anc = parents[anc]
-        Ancestors_A.append(anc)
-
-    anc = B
-    if anc in Ancestors_A:
-        print(anc)
-        continue
-
-    while anc in parents:
-        anc = parents[anc]
-        if anc in Ancestors_A:
-            print(anc)
-            break
+    print(B)
